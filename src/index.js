@@ -1,6 +1,7 @@
 const holes = document.querySelectorAll(".hole");
 const moles = document.querySelectorAll(".mole");
 const startButton = document.querySelector("#start");
+const startSection = document.querySelector("#startSection");
 const score = document.querySelector("#score");
 const timerDisplay = document.querySelector("#timer");
 
@@ -52,7 +53,7 @@ function setDelay(difficulty) {
   } else if (difficulty === "normal") {
     return 1000;
   } else if (difficulty === "hard") {
-    return Math.floor(Math.random() * (1200 - 600 + 1)) + 600;
+    return Math.floor(Math.random() * (1100 - 500 + 1)) + 500;
   }
 }
 
@@ -263,7 +264,16 @@ function startGame() {
   setDuration(10);
   startTimer();
   showUp();
+  hideStart();
   return "game started";
+}
+
+function hideStart() {
+  startSection.style.display = "none"; //first hide the button
+  setTimeout(function () {
+    //using setTimeout function
+    startSection.style.display = "block"; //displaying the button again after 3000ms or 3 seconds
+  }, 10000);
 }
 
 startButton.addEventListener("click", startGame);
