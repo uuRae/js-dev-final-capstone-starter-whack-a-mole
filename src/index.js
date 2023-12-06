@@ -10,6 +10,14 @@ let lastHole = 0;
 let points = 0;
 let difficulty = "hard";
 
+let bgMusic = document.getElementById("purr");
+let hit = document.getElementById("pet");
+
+function playSound(audio) {
+  audio.currentTime = 0;
+  audio.play();
+}
+
 /**
  * Generates a random integer within a range.
  *
@@ -85,14 +93,8 @@ function chooseHole(holes) {
  * return the timeoutId if the game continues or the string "game stopped"
  * if the game is over.
  *
- *  // if time > 0:
- *  //   timeoutId = showUp()
- *  //   return timeoutId
- *  // else
- *  //   gameStopped = stopGame()
- *  //   return gameStopped
- *
  */
+
 function gameOver() {
   if (time > 0) {
     let timeoutId = showUp();
@@ -210,6 +212,7 @@ function startTimer() {
  *
  */
 function whack(event) {
+  playSound(pet);
   updateScore();
   return points;
 }
@@ -242,7 +245,7 @@ function setDuration(duration) {
  *
  */
 function stopGame() {
-  // stopAudio(song);  //optional
+  purr.pause();
   clearInterval(timer);
   return "game stopped";
 }
@@ -254,9 +257,10 @@ function stopGame() {
  *
  */
 function startGame() {
+  purr.play();
   clearScore();
   setEventListeners();
-  setDuration(15);
+  setDuration(10);
   startTimer();
   showUp();
   return "game started";
